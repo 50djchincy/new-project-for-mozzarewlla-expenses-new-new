@@ -1,0 +1,7 @@
+{
+  "name": "Mozzarella Expenses",
+  "description": "A high-end restaurant operations and expense manager with a neumorphic dark-mode UI, featuring 'The Money Lab' for core financial tracking.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
