@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { Account, Transaction, DailyLog, Staff, Vendor, ExpenseCategory, PaymentTemplate, RecurringPayment, StaffHoliday } from '../types';
 
@@ -247,9 +246,18 @@ export const AccountsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const toggleStaffHoliday = (staffId: string, date: string) => {
     setStaffHolidays(prev => {
       const exists = prev.find(h => h.staffId === staffId && h.date === date);
-      let updated;
-      if (exists) updated = prev.filter(h => h.id !== exists.id);
-      else updated = [...prev, { id: `hol_${Date.now()}`, staffId, date, type: 'Full Day' }];
+      let updated: StaffHoliday[];
+      if (exists) {
+        updated = prev.filter(h => h.id !== exists.id);
+      } else {
+        const newHoliday: StaffHoliday = { 
+          id: `hol_${Date.now()}`, 
+          staffId, 
+          date, 
+          type: 'Full Day' 
+        };
+        updated = [...prev, newHoliday];
+      }
       localStorage.setItem('mozz_staff_holidays', JSON.stringify(updated));
       return updated;
     });
